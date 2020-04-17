@@ -1,0 +1,19 @@
+{
+  "name": "vulnerable-web-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "lodash": "^4.17.4",
+    "method-override": "^3.0.0",
+    "sequelize": "^5.8.10"
+  }
+}
