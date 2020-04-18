@@ -3,8 +3,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const cookierParser = require('cookie-parser');
-const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+//const methodOverride = require('method-override');
+const _ = require('lodash');
 
 const database = require('./database');
 
@@ -14,7 +15,27 @@ app.set('view engine', 'ejs')
 
 app.use(cors());
 app.use(bodyParser.json())
-app.use(cookierParser());
+app.use(cookieParser());
+
+app.post('/save', (req, res, next) => {
+    const payload = _.defaultsDeep({}, req.body);
+    // ref: https://snyk.io/vuln/SNYK-JS-LODASH-450202
+    // const payload = '{"constructor": {"prototype": {"a0": true}}}'
+    if(({})[`a0`] === true) {
+        console.log(`vulnerable to prototype pollution via ${payload}`);
+    }
+    return payload
+});
+
+app.post('/update', (req, res, next) => {
+    const payload = _.merge({}, req.body);
+    // ref: https://snyk.io/vuln/SNYK-JS-LODASH-450202
+    // const payload = '{"constructor": {"prototype": {"a0": true}}}'
+    if(({})[`a0`] === true) {
+        console.log(`vulnerable to prototype pollution via ${payload}`);
+    }
+    return payload
+});
 
 app.get('/header-injection', (req, res, next) => {
     const userInput = req.query.requestid || '12345-12345';

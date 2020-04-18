@@ -39,10 +39,10 @@ async function init() {
 }
 
 async function getUsersByMetadata(key, value) {
-    // sql injection
+    // ref: https://snyk.io/vuln/SNYK-JS-SEQUELIZE-450221
+    // {metadata: {"age')) AS DECIMAL) > 40- UNION SELECT VERSION(); -- ": value}},
     const where = {metadata: {}};
     where.metadata[key] = value;
-    // {metadata: {"age')) AS DECIMAL) > 40- UNION SELECT VERSION(); -- ": value}},
 
     return await User.findAll({
         where: where,
@@ -52,6 +52,7 @@ async function getUsersByMetadata(key, value) {
 }
 
 async function getUsersByMetadataJson(input) {
+    // ref: https://snyk.io/vuln/SNYK-JS-SEQUELIZE-459751
     // "metadata.kids')) = 2 UNION SELECT VERSION(); -- "
     await User.findAll({
         where: {name: sequelize.json(input, 2)},
