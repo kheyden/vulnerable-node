@@ -22,7 +22,7 @@ async function init() {
     await User.create({
         name: 'Jane Doe',
         username: 'janedoe',
-        birthday: new Date(1980, 4, 05),
+        birthday: new Date(1980, 4, 5),
         metadata: {
             age: 42,
         }
