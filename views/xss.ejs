@@ -4,4 +4,8 @@
 
 <p>XSS Value: <%= userInput %></p>
 
+<script type="text/javascript">
+  var test = <%= scriptInput %>
+</script>
+
 <%- include('partials/footer') %>
