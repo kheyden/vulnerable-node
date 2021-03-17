@@ -48,9 +48,12 @@ app.get('/header-injection', (req, res, next) => {
 
 app.get('/xss', (req, res, next) => {
     const userInput = req.query.input || '<script>alert("uhoh")</script>';
-    res.set('X-Request-ID', userInput);
+    const scriptInput  = req.query.scriptInput || 1;
+    res.set('X-Request-ID', userInput
+            
     res.render('xss', {
-        userInput
+        userInput,
+        scriptInput
     });
 });
 
